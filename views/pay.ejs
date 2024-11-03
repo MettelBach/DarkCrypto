@@ -3,7 +3,7 @@
     <a href="/wallet" class="buttonR">← Back</a>
     <h1 style="text-align: center; margin-bottom: 20px; margin-top: 20px;">PayPage</h1>
     <label for="usdPayment">USD</label>
-    <input type="number" class="field" id="usdPayment" placeholder="USD" min="1" step="0.01" oninput="formatInput(this)">
+    <input type="number" class="field" id="usdPayment" placeholder="USD" min="1" step="0.01" oninput="formatInput(this)" required>
     <label class="crypto-coin" for="cryptoCoin">Coin</label>
     <input type="number" class="field" id="cryptoCoin" placeholder="Coin" min="0" step="0.0000000001" oninput="formatInput(this)" readonly>
     <div class="button-container5">
@@ -47,6 +47,15 @@
       window.location.href = `/pay/stripe?coinValue=${coinValue}&usdValue=${usdValue}&coinName=${coinName}`;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  function formatInput(input) {
+    const value = parseFloat(input.value);
+    
+    if (value < 1) {
+        alert("The value must be at least 1.");
+        input.value = 1;
     }
   }
 </script>
